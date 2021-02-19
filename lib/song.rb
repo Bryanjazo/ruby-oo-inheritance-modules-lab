@@ -1,8 +1,14 @@
 require 'pry'
-
 class Song
+
+  extend Findable::ClassMethods
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
+  include Paramable::InstanceMethods
+  
   attr_accessor :name
   attr_reader :artist
+
 
   @@songs = []
 
@@ -18,19 +24,13 @@ class Song
     @@songs
   end
 
-  def self.reset_all
-    self.all.clear
-  end
 
-  def self.count
-    self.all.count
-  end
 
   def artist=(artist)
     @artist = artist
   end
-
-  def to_param
-    name.downcase.gsub(' ', '-')
-  end
+  #
+  # def to_param
+  #   name.downcase.gsub(' ', '-')
+  # end
 end
